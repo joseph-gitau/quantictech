@@ -26,7 +26,7 @@
                     <td>{{ customer.phone_number }}</td>
                     <td>{{ customer.address }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @click="editCustomer(customer)">Edit</button>
+                        <button class="btn btn-sm btn-primary mr-2" @click="editCustomer(customer)">Edit</button>
                         <button class="btn btn-sm btn-danger" @click="deleteCustomer(customer.id)">Delete</button>
                     </td>
                 </tr>

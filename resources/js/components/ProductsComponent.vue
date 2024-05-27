@@ -26,7 +26,7 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.quantity_in_stock }}</td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @click="editProduct(product)">Edit</button>
+                        <button class="btn btn-sm btn-primary mr-2" @click="editProduct(product)">Edit</button>
                         <button class="btn btn-sm btn-danger" @click="deleteProduct(product.id)">Delete</button>
                     </td>
                 </tr>

@@ -12,7 +12,7 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('orders', OrderController::class);
 Route::apiResource('dashboard', DashboardController::class);
 
-// Public routes for authentication 
+// Public routes for authentication
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

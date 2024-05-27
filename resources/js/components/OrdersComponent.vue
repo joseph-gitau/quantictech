@@ -40,7 +40,7 @@
                         </ul>
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-primary" @click="editOrder(order)">Edit</button>
+                        <button class="btn btn-sm btn-primary mr-2" @click="editOrder(order)">Edit</button>
                         <button class="btn btn-sm btn-danger" @click="deleteOrder(order.id)">Delete</button>
                     </td>
                 </tr>
@@ -78,12 +78,14 @@
                                 <select
                                     class="form-control"
                                     v-model="newOrder.customer_id"
-                                    
+
                                 >
-                                    <option
+                                    <!-- <option
                                         v-for="customer in customers"
                                         :value="customer.id"
-                                    >
+                                    > -->
+                                    <option v-for="customer in customers"
+                                        :value="customer.id" :key="customer.id">
                                         {{ customer.name }}
                                     </option>
                                 </select>
@@ -93,12 +95,15 @@
                                 <select
                                     class="form-control"
                                     v-model="selectedProduct"
-                                    
+
                                 >
-                                    <option
+                                    <!-- <option
                                         v-for="product in products"
                                         :value="product.id"
-                                    >
+                                    > -->
+                                    <option v-for="product in products"
+                                           :value="product.id"
+                                           :key="product.id">
                                         {{ product.name }}
                                     </option>
                                 </select>
@@ -109,7 +114,7 @@
                                     type="number"
                                     class="form-control"
                                     v-model="quantity"
-                                    
+
                                 />
                             </div>
                             <button
@@ -180,10 +185,14 @@
                                     v-model="editedOrder.customer_id"
                                     required
                                 >
-                                    <option
+                                    <!-- <option
                                         v-for="customer in customers"
                                         :value="customer.id"
-                                    >
+                                    > -->
+                                    <option v-for="customer in customers"
+                                        :value="customer.id"
+                                        :key="customer.id">
+
                                         {{ customer.name }}
                                     </option>
                                 </select>

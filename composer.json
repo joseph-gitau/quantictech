@@ -10,7 +10,8 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "laravel/ui": "^4.5"
+        "laravel/ui": "^4.5",
+        "smodav/mpesa": "^6.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -26,7 +27,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "SmoDav\\Mpesa\\": "vendor/smodav/mpesa/src/"
         }
     },
     "autoload-dev": {

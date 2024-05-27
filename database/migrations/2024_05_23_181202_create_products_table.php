@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2);//total no of digits, no of digits after decimal
             $table->integer('quantity_in_stock');
             $table->timestamps();
         });

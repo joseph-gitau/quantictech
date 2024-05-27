@@ -4,9 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class extends Migration// a way to create a new migration
 {
-    public function up()
+    public function up()//defines changes to b made in db
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
@@ -18,8 +18,8 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
+    public function down(): void//reverts changes in up method
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('customers');//drops tale if it exists
     }
 };
