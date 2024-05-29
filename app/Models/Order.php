@@ -52,4 +52,13 @@ class Order extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
+
+    /**
+     * Define relationships if any.
+     * For example, if an order has one payment:
+     */
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

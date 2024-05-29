@@ -18,6 +18,12 @@
                         @endforeach
                     </ul>
                     <p><strong>Total Amount:</strong> ${{ $order->total_amount }}</p>
+                    
+                    <!-- Payment details -->
+                    <p><strong>Payment Status:</strong> {{ $payment->ResultCode == 0 ? 'Completed' : 'Failed' }}</p>
+                    <p><strong>Transaction Date:</strong> {{ date('d M Y, h:i A', $payment->TransactionDate) }}</p>
+                    <p><strong>Mpesa Receipt Number:</strong> {{ $payment->MpesaReceiptNumber }}</p>
+                    <p><strong>Payment Amount:</strong> ${{ $payment->Amount }}</p>
 
                     <!-- Button to generate and download PDF -->
                     <a href="{{ route('generate.invoice.pdf', $order->id) }}" class="btn btn-primary">Generate PDF Invoice</a>

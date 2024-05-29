@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Http;
 
 class InvoiceController extends Controller
@@ -21,20 +22,26 @@ class InvoiceController extends Controller
     {
         try {
             // Fetch the order details from the database, including the customer and products
-            $order = Order::with('customer', 'products')->findOrFail($orderId);
+            $order = Order::with('customer', 'products', 'payment')->findOrFail($orderId);
 
             // Pass the fetched order data to the invoice view
             $data = [
                 'order' => $order,
                 'customer' => $order->customer,
                 'products' => $order->products,
+                'payment' => $order->payment,
             ];
+            /* echo '<pre>';
+            print_r($data);
+            echo '</pre>';
+            die(); */
 
             // Return the invoice view with the data
             return view('invoice', $data);
         } catch (\Exception $e) {
             // Handle any errors (e.g., order not found)
-            return redirect()->back()->with('error', 'Invoice generation failed. ' . $e->getMessage());
+            echo $e->getMessage();
+            //return redirect()->back()->with('error', 'Invoice generation failed. ' . $e->getMessage());
         }
     }
 
@@ -42,13 +49,14 @@ class InvoiceController extends Controller
     {
         try {
             // Fetch the order details from the database, including the customer and products
-            $order = Order::with('customer', 'products')->findOrFail($orderId);
+            $order = Order::with('customer', 'products', 'payment')->findOrFail($orderId);
 
             // Pass the fetched order data to the invoice view
             $data = [
                 'order' => $order,
                 'customer' => $order->customer,
                 'products' => $order->products,
+                'payment' => $order->payment,
             ];
 
             // Generate PDF from the invoice view
