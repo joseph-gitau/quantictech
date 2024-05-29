@@ -46,27 +46,32 @@ class OrderController extends Controller
         }
 
         DB::beginTransaction();
+        $order = Order::create([
+            'customer_id' => $validated['customer_id'],
+            'total_amount' => $total_amount,
+            'phone' => $validated['phone'],
+            'order_status' => 'pending'
+        ]);
+
+        foreach ($validated['products'] as $product) {
+            $order->products()->attach($product['product_id'], ['quantity' => $product['quantity']]);
+        }
+
+        // Commit the transaction to ensure the order is saved
+        DB::commit();
+
+        //get inserted order
+        $order = Order::find($order->id);
+        $lastInsertedId = $order->id;
         try {
-            $order = Order::create([
-                'customer_id' => $validated['customer_id'],
-                'total_amount' => $total_amount,
-                'phone' => $validated['phone'],
-                'order_status' => 'pending'
-            ]);
-
-            foreach ($validated['products'] as $product) {
-                $order->products()->attach($product['product_id'], ['quantity' => $product['quantity']]);
-            }
-
-            // Commit the transaction to ensure the order is saved
-            DB::commit();
 
             // Trigger MPesa STK push
             $mpesaController = new MpesaController();
             $mpesaResponse = $mpesaController->stkPush(new Request([
                 'phone' => $validated['phone'],
-                'amount' => $order->total_amount,
-                'order_id' => $order->id,
+                'amount' => 1,
+                // 'amount' => $order->total_amount,
+                'order_id' => $lastInsertedId
             ]));
         } catch (\Exception $e) {
             DB::rollBack();
@@ -82,8 +87,6 @@ class OrderController extends Controller
             'mpesa_response' => $mpesaResponse
         ]);
     }
-
-
 
     public function callback(Request $request)
     {

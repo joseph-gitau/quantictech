@@ -23,7 +23,6 @@ return [
     'cache_location' => '../cache',
     'lifetime' => (int) env('SESSION_LIFETIME', 120),
 
-
     /*
     |--------------------------------------------------------------------------
     | Accounts
@@ -53,7 +52,7 @@ return [
                 'paybill' => 174379,
                 'shortcode' => 174379,
                 'passkey' => 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919',
-                'callback' => 'https://5458-102-212-236-204.ngrok-free.app/mpesa/callback',
+                'callback' => 'https://5458-102-212-236-204.ngrok-free.app/api/mpesa/callback',
             ]
         ],
 

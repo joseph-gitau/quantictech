@@ -72,7 +72,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form @submit.prevent="initiateMpesaPayment">
+                        <form @submit.prevent="saveOrder">
                             <div class="form-group">
                                 <label for="customer">Customer</label>
                                 <select
@@ -320,6 +320,9 @@ export default {
             }
         },
         initiateMpesaPayment() {
+            // first save the order
+
+            // then initiate payment with M-Pesa
             this.loading = true;
             this.newOrder.phone = this.phone;
             axios.post('/api/mpesa/stkpush', {
@@ -342,9 +345,13 @@ export default {
             });
         },
         saveOrder() {
-            axios.post("/api/orders", this.newOrder).then((response) => {
+            axios.post("/api/orders", {
+                ...this.newOrder,
+                phone: this.phone
+            }).then((response) => {
                 this.loading = false;
                 $("#addOrderModal").modal("hide");
+                // 
                 this.fetchOrders();
             }).catch(error => {
                 this.loading = false;
